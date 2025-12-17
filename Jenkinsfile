@@ -1,12 +1,19 @@
 pipeline {
     agent any
     
+    environment {
+        DEPLOY_PATH = '/var/www/fymio.us'
+    }
+    
     stages {
         stage('Deploy') {
             steps {
                 sh '''
-                    # Copy files to web directory
-                    cp -r * /var/www/fymio.us/
+                    # Deploy to host via SSH
+                    scp -o StrictHostKeyChecking=no index.html root@172.17.0.1:${DEPLOY_PATH}/
+                    
+                    # If you have other files/folders later:
+                    # scp -o StrictHostKeyChecking=no -r assets/ root@172.17.0.1:${DEPLOY_PATH}/
                 '''
             }
         }
@@ -14,7 +21,7 @@ pipeline {
     
     post {
         success {
-            echo 'Deployment successful!'
+            echo 'Deployment successful! Visit https://fymio.us'
         }
         failure {
             echo 'Deployment failed!'
