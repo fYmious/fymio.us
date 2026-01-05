@@ -1,0 +1,607 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy 20th Birthday! 💜</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            min-height: 100vh;
+            overflow-x: hidden;
+            color: #fff;
+            position: relative;
+        }
+
+        /* Dynamic animated background */
+        .background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+            background-size: 400% 400%;
+            animation: gradientShift 15s ease infinite;
+        }
+
+        @keyframes gradientShift {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        .background::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 20% 50%, rgba(224, 195, 252, 0.3) 0%, transparent 50%),
+                        radial-gradient(circle at 80% 80%, rgba(167, 139, 250, 0.3) 0%, transparent 50%),
+                        radial-gradient(circle at 40% 20%, rgba(196, 181, 253, 0.2) 0%, transparent 50%);
+            animation: pulse 8s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                opacity: 1;
+            }
+            50% {
+                opacity: 0.6;
+            }
+        }
+
+        /* Parallax layers */
+        .parallax-container {
+            position: relative;
+            z-index: 1;
+        }
+
+        .stars {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .star {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: white;
+            border-radius: 50%;
+            animation: twinkle 3s infinite;
+        }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 1; }
+        }
+
+        .hearts {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 3;
+            top: 0;
+            left: 0;
+        }
+
+        .heart {
+            position: absolute;
+            font-size: 2rem;
+            animation: floatUp 6s ease-in infinite;
+            opacity: 0;
+        }
+
+        @keyframes floatUp {
+            0% {
+                opacity: 0;
+                transform: translateY(0) rotate(0deg);
+            }
+            10% {
+                opacity: 0.8;
+            }
+            90% {
+                opacity: 0.8;
+            }
+            100% {
+                opacity: 0;
+                transform: translateY(-100vh) rotate(360deg);
+            }
+        }
+
+        .container {
+            position: relative;
+            z-index: 2;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        .hero {
+            text-align: center;
+            margin-bottom: 60px;
+            animation: fadeInDown 1s ease-out;
+            min-height: 80vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            text-shadow: 0 4px 20px rgba(0,0,0,0.3);
+            background: linear-gradient(45deg, #fff, #e0c3fc);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero .age {
+            font-size: 6rem;
+            font-weight: 900;
+            display: inline-block;
+            animation: bounceIn 1.5s ease-out;
+            text-shadow: 0 4px 30px rgba(224, 195, 252, 0.6);
+        }
+
+        @keyframes bounceIn {
+            0% {
+                transform: scale(0);
+                opacity: 0;
+            }
+            50% {
+                transform: scale(1.2);
+            }
+            100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        .hero p {
+            font-size: 1.5rem;
+            margin-top: 20px;
+            opacity: 0.95;
+        }
+
+        /* Glassmorphism cards */
+        .glass-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-radius: 25px;
+            padding: 40px;
+            margin-bottom: 50px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2),
+                        inset 0 1px 0 rgba(255, 255, 255, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            animation: fadeInUp 1s ease-out both;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .glass-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(
+                45deg,
+                transparent,
+                rgba(255, 255, 255, 0.1),
+                transparent
+            );
+            transform: rotate(45deg);
+            animation: shimmer 3s infinite;
+        }
+
+        @keyframes shimmer {
+            0% {
+                transform: translateX(-100%) translateY(-100%) rotate(45deg);
+            }
+            100% {
+                transform: translateX(100%) translateY(100%) rotate(45deg);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .glass-card h2 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+            color: #e0c3fc;
+            position: relative;
+            z-index: 1;
+        }
+
+        .glass-card p {
+            font-size: 1.2rem;
+            line-height: 1.8;
+            margin-bottom: 15px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .photo-gallery {
+            margin-top: 50px;
+        }
+
+        .photo-gallery h2 {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 40px;
+            animation: fadeInUp 1s ease-out both;
+        }
+
+        .photo-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            animation: fadeInUp 1s ease-out both;
+        }
+
+        .photo-item {
+            position: relative;
+            aspect-ratio: 1;
+            border-radius: 20px;
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            cursor: pointer;
+        }
+
+        .photo-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(224, 195, 252, 0.2), rgba(167, 139, 250, 0.2));
+            z-index: 0;
+        }
+
+        .photo-item:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 15px 40px rgba(224, 195, 252, 0.4);
+        }
+
+        .photo-placeholder {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            color: rgba(255,255,255,0.6);
+            position: relative;
+            z-index: 1;
+        }
+
+        .photo-placeholder span {
+            font-size: 1rem;
+            margin-top: 10px;
+        }
+
+        .photo-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .photo-caption {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(transparent, rgba(0,0,0,0.8));
+            padding: 20px;
+            transform: translateY(100%);
+            transition: transform 0.3s ease;
+            z-index: 2;
+        }
+
+        .photo-item:hover .photo-caption {
+            transform: translateY(0);
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 80px;
+            padding: 40px 20px;
+            font-size: 1.2rem;
+            animation: fadeIn 2s ease-out 2s both;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        /* Parallax decorative elements */
+        .parallax-element {
+            position: fixed;
+            pointer-events: none;
+            z-index: 2;
+        }
+
+        .circle-1 {
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(224, 195, 252, 0.3), transparent);
+            top: 10%;
+            left: -10%;
+            filter: blur(40px);
+        }
+
+        .circle-2 {
+            width: 400px;
+            height: 400px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(167, 139, 250, 0.3), transparent);
+            bottom: 20%;
+            right: -10%;
+            filter: blur(50px);
+        }
+
+        .circle-3 {
+            width: 250px;
+            height: 250px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(196, 181, 253, 0.4), transparent);
+            top: 50%;
+            left: 50%;
+            filter: blur(30px);
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2.5rem; }
+            .hero .age { font-size: 4rem; }
+            .hero p { font-size: 1.2rem; }
+            .glass-card { padding: 25px; }
+            .photo-grid { grid-template-columns: 1fr; }
+            .circle-1, .circle-2, .circle-3 { display: none; }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            * {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="background"></div>
+    
+    <div class="parallax-element circle-1"></div>
+    <div class="parallax-element circle-2"></div>
+    <div class="parallax-element circle-3"></div>
+
+    <div class="stars" id="stars"></div>
+    <div class="hearts" id="hearts"></div>
+
+    <div class="parallax-container">
+        <div class="container">
+            <div class="hero">
+                <h1>Happy Birthday!</h1>
+                <div class="age">20</div>
+                <p>Celebrating an amazing person on their special day ✨</p>
+            </div>
+
+            <div class="glass-card" style="animation-delay: 0.3s;">
+                <h2>To My Amazing Girlfriend 💜</h2>
+                <p>Happy 20th birthday to the most incredible person I know! Today marks the beginning of a new decade filled with endless possibilities, dreams, and adventures.</p>
+                <p>This year has been filled with so many beautiful moments together, and I can't wait to create countless more memories with you. You make every day brighter and every moment more special.</p>
+                <p>Here's to you, to us, and to all the amazing things that await you in this new chapter of your life. You deserve all the happiness in the world!</p>
+                <p>I love you more than words can express. Happy 20th! 🎉💜</p>
+            </div>
+
+            <div class="photo-gallery">
+                <h2>Our Memories from This Year 📸</h2>
+                <div class="photo-grid">
+                    <div class="photo-item">
+                        <div class="photo-placeholder">
+                            📷
+                            <span>Add your photo here</span>
+                        </div>
+                        <div class="photo-caption">Memory #1</div>
+                    </div>
+                    <div class="photo-item">
+                        <div class="photo-placeholder">
+                            📷
+                            <span>Add your photo here</span>
+                        </div>
+                        <div class="photo-caption">Memory #2</div>
+                    </div>
+                    <div class="photo-item">
+                        <div class="photo-placeholder">
+                            📷
+                            <span>Add your photo here</span>
+                        </div>
+                        <div class="photo-caption">Memory #3</div>
+                    </div>
+                    <div class="photo-item">
+                        <div class="photo-placeholder">
+                            📷
+                            <span>Add your photo here</span>
+                        </div>
+                        <div class="photo-caption">Memory #4</div>
+                    </div>
+                    <div class="photo-item">
+                        <div class="photo-placeholder">
+                            📷
+                            <span>Add your photo here</span>
+                        </div>
+                        <div class="photo-caption">Memory #5</div>
+                    </div>
+                    <div class="photo-item">
+                        <div class="photo-placeholder">
+                            📷
+                            <span>Add your photo here</span>
+                        </div>
+                        <div class="photo-caption">Memory #6</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer">
+                <p>With all my love, today and always 💜</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Create stars
+        const starsContainer = document.getElementById('stars');
+        for (let i = 0; i < 100; i++) {
+            const star = document.createElement('div');
+            star.className = 'star';
+            star.style.left = Math.random() * 100 + '%';
+            star.style.top = Math.random() * 100 + '%';
+            star.style.animationDelay = Math.random() * 3 + 's';
+            starsContainer.appendChild(star);
+        }
+
+        // Create floating hearts
+        const heartsContainer = document.getElementById('hearts');
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.className = 'heart';
+            heart.innerHTML = '💜';
+            heart.style.left = Math.random() * 100 + '%';
+            heart.style.animationDuration = (Math.random() * 3 + 4) + 's';
+            heartsContainer.appendChild(heart);
+
+            setTimeout(() => {
+                heart.remove();
+            }, 6000);
+        }
+
+        setInterval(createHeart, 800);
+
+        // Parallax effect
+        document.addEventListener('mousemove', (e) => {
+            const mouseX = e.clientX / window.innerWidth;
+            const mouseY = e.clientY / window.innerHeight;
+
+            // Move stars slower
+            const stars = document.querySelectorAll('.star');
+            stars.forEach((star, index) => {
+                const speed = (index % 3 + 1) * 0.5;
+                const x = (mouseX - 0.5) * speed * 20;
+                const y = (mouseY - 0.5) * speed * 20;
+                star.style.transform = `translate(${x}px, ${y}px)`;
+            });
+
+            // Move circles with parallax
+            const circles = document.querySelectorAll('.parallax-element');
+            circles.forEach((circle, index) => {
+                const speed = (index + 1) * 10;
+                const x = (mouseX - 0.5) * speed;
+                const y = (mouseY - 0.5) * speed;
+                circle.style.transform = `translate(${x}px, ${y}px)`;
+            });
+        });
+
+        // Scroll-based parallax
+        let ticking = false;
+        
+        document.addEventListener('scroll', () => {
+            if (!ticking) {
+                window.requestAnimationFrame(() => {
+                    const scrolled = window.pageYOffset;
+                    
+                    // Parallax for hero section
+                    const hero = document.querySelector('.hero');
+                    if (hero) {
+                        hero.style.transform = `translateY(${scrolled * 0.5}px)`;
+                        hero.style.opacity = Math.max(1 - scrolled / 500, 0);
+                    }
+
+                    // Parallax for circles
+                    const circle1 = document.querySelector('.circle-1');
+                    const circle2 = document.querySelector('.circle-2');
+                    const circle3 = document.querySelector('.circle-3');
+                    
+                    if (circle1) circle1.style.transform = `translateY(${scrolled * 0.3}px)`;
+                    if (circle2) circle2.style.transform = `translateY(${scrolled * -0.2}px)`;
+                    if (circle3) circle3.style.transform = `translateY(${scrolled * 0.4}px)`;
+
+                    ticking = false;
+                });
+                
+                ticking = true;
+            }
+        });
+
+        // Animate cards on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.glass-card, .photo-item').forEach(el => {
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>

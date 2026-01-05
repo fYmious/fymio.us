@@ -8,13 +8,10 @@ pipeline {
     stages {
         stage('Deploy') {
             steps {
-                sh '''
-                    # Deploy to host via SSH
-                    scp -o StrictHostKeyChecking=no index.html root@172.17.0.1:${DEPLOY_PATH}/
-                    
-                    # If you have other files/folders later:
-                    # scp -o StrictHostKeyChecking=no -r assets/ root@172.17.0.1:${DEPLOY_PATH}/
-                '''
+              sh '''
+                scp -o StrictHostKeyChecking=no index.html root@172.17.0.1:${DEPLOY_PATH}/
+                scp -o StrictHostKeyChecking=no -r congrats/ root@172.17.0.1:${DEPLOY_PATH}/
+              '''
             }
         }
     }
