@@ -482,89 +482,6 @@
         </style>
     </head>
     <body>
-        <!-- Password Protection Overlay -->
-        <div
-            id="passwordOverlay"
-            style="
-                position: fixed;
-                top: 0;
-                left: 0;
-                width: 100%;
-                height: 100%;
-                background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-                z-index: 9999;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-            "
-        >
-            <div
-                style="
-                    background: rgba(255, 255, 255, 0.15);
-                    backdrop-filter: blur(20px);
-                    border-radius: 25px;
-                    padding: 40px;
-                    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
-                    border: 1px solid rgba(255, 255, 255, 0.2);
-                    text-align: center;
-                    max-width: 400px;
-                "
-            >
-                <h2
-                    style="color: #e0c3fc; margin-bottom: 20px; font-size: 2rem"
-                >
-                    🔒 секртетик
-                </h2>
-                <p style="margin-bottom: 30px; font-size: 1.1rem">
-                    последний закреп в лс тг
-                </p>
-                <input
-                    type="password"
-                    id="passwordInput"
-                    placeholder="Password"
-                    style="
-                        width: 100%;
-                        padding: 15px;
-                        border-radius: 10px;
-                        border: 2px solid rgba(255, 255, 255, 0.3);
-                        background: rgba(255, 255, 255, 0.1);
-                        color: white;
-                        font-size: 1rem;
-                        margin-bottom: 20px;
-                        outline: none;
-                    "
-                />
-                <button
-                    onclick="checkPassword()"
-                    style="
-                        width: 100%;
-                        padding: 15px;
-                        border-radius: 10px;
-                        border: none;
-                        background: linear-gradient(135deg, #667eea, #764ba2);
-                        color: white;
-                        font-size: 1.1rem;
-                        cursor: pointer;
-                        font-weight: 600;
-                        transition: transform 0.2s;
-                    "
-                >
-                    Enter
-                </button>
-                <p
-                    id="errorMsg"
-                    style="
-                        color: #ff6b6b;
-                        margin-top: 15px;
-                        font-size: 0.9rem;
-                        display: none;
-                    "
-                >
-                    неправильно
-                </p>
-            </div>
-        </div>
-
         <div class="background"></div>
 
         <div class="parallax-element circle-1"></div>
@@ -574,10 +491,10 @@
         <div class="stars" id="stars"></div>
         <div class="hearts" id="hearts"></div>
 
-        <div class="parallax-container" style="filter: blur(10px)">
+        <div class="parallax-container">
             <div class="container">
                 <div class="hero">
-                    <h1>С ДНЕМ РОЖДЕНИЯ</h1>
+                    <h1>Happy Birthday!</h1>
                     <div class="age">20</div>
                     <p>Машуленок, я тебя сильно сильно люблю❤️❤️❤️</p>
                 </div>
@@ -611,6 +528,7 @@
                         надо написать. я не буду спрашивать у гпт. я сам тут
                         написал.
                     </p>
+
                     <p>
                         Ниже Вы можете увидеть фотоматериалы, произведенные в
                         течение 2025 года.
@@ -618,7 +536,7 @@
                 </div>
 
                 <div class="photo-gallery">
-                    <h2>Вот тут я фоточки вставил типа ойойоойой 📸</h2>
+                    <h2>Вот тут я фоточки вставил типа ойойоойой</h2>
                     <div class="photo-grid">
                         <div class="photo-item">
                             <img src="1.jpg" />
@@ -684,32 +602,6 @@
         </div>
 
         <script>
-            // Password Protection
-            const correctPassword = "экстрасекс"; // Change this to your password!
-
-            function checkPassword() {
-                const input = document.getElementById("passwordInput").value;
-                if (input === correctPassword) {
-                    document.getElementById("passwordOverlay").style.display =
-                        "none";
-                    document.querySelector(".parallax-container").style.filter =
-                        "none";
-                } else {
-                    document.getElementById("errorMsg").style.display = "block";
-                    document.getElementById("passwordInput").value = "";
-                    document.getElementById("passwordInput").focus();
-                }
-            }
-
-            // Allow Enter key to submit
-            document
-                .getElementById("passwordInput")
-                .addEventListener("keypress", function (e) {
-                    if (e.key === "Enter") {
-                        checkPassword();
-                    }
-                });
-
             // Create stars
             const starsContainer = document.getElementById("stars");
             for (let i = 0; i < 100; i++) {
